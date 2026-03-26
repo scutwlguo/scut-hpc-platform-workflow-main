@@ -617,6 +617,11 @@ conda activate gwl
 # 切换到代码目录
 cd /share/home/202420114127/gwl/code
 echo "Running on node: $SLURMD_NODENAME"
+echo "Start time: $(date)"
+echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+
+# 查看GPU
+nvidia-smi
 
 # 运行训练脚本（unbuffered 模式）
 export PYTHONUNBUFFERED=1
