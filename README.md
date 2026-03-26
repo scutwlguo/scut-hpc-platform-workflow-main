@@ -606,7 +606,7 @@ python train_DWTinformer.py
 #SBATCH --nodes=1                   # 请求 1 个节点
 #SBATCH --ntasks-per-node=1         # 每个节点 1 个任务
 #SBATCH --gres=gpu:1                # 请求 1 个 GPU
-#SBATCH --cpus-per-task=8          # ⭐关键（避免多收费）
+#SBATCH --cpus-per-task=8           # ⭐关键（避免多收费）
 #SBATCH --partition=gpuA800         # GPU 分区
 #SBATCH --time=04:00:00             # 最长运行时间 4 小时
 
