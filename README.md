@@ -516,17 +516,30 @@ conda install mkl=2023.1.0 -y
 #### 8.2.1 申请 GPU 节点
 
 ```bash
-srun --partition=gpuA800 --gres=gpu:1 --pty bash
+srun --partition=gpuA800 --gres=gpu:1 --cpus-per-task=8 --pty bash
 ```
 
 **可选参数**：
 
 | 参数 | 说明 |
 |------|------|
-| `--gres=gpu:2` | 请求 2 个 GPU |
+| `--gres=gpu:2` | 请求 2 个 GPU（需配 16 CPU） |
+| `--cpus-per-task=16` | 对应 2 GPU（必须匹配比例） |
 | `--nodes=2` | 请求 2 个计算节点 |
 | `--ntasks-per-node=1` | 每个节点运行 1 个任务 |
-| `--time=01:00:00` | 限制最长运行时间为 1 小时 |
+| `--time=01:00:00` | 限制最长运行时间 |
+
+**注意事项**：
+
+1. 集群按 CPU:GPU=8:1 收费  
+   - 1 GPU → 8 CPU  
+   - 超过比例会按更多 GPU 计费  
+
+2. 示例：
+   - `8 CPU + 1 GPU` → 正常  
+   - `9 CPU + 1 GPU` → 按 2 GPU 收费 ❗  
+
+3. 建议始终明确指定 `--cpus-per-task`
 
 #### 8.2.2 执行代码
 
@@ -551,7 +564,7 @@ python train_DWTinformer.py
 
 > **注意**：交互式方式适合短时调试。如果终端关闭或网络断开,任务会立即终止。
 
-#### 8.2.3 查看 GPU 使用情况
+#### 8.2.3 查看 GPU 使用情况(已废弃，可跳过)
 
 **问题**：代码运行时当前终端被占用,无法在同一终端运行 `nvidia-smi`。
 
