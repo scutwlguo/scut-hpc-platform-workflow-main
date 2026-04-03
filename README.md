@@ -618,7 +618,7 @@ python train_DWTinformer.py
    nvidia-smi
    ```
 
-> **已知限制**：经实测发现,系统分配的是部分空闲 GPU,无法查看正在运行任务的 GPU 使用情况。
+
 
 ### 8.3 批处理作业方式（推荐）
 
